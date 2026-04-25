@@ -20,6 +20,10 @@ export const HomePage = () => {
         }, {});
     }, []);
 
+    const categoryEntries = useMemo(() => {
+        return Object.entries(itemsByCategory);
+    }, [itemsByCategory]);
+
     return (
         <Box
             sx={{
@@ -36,7 +40,7 @@ export const HomePage = () => {
                         overflow: "hidden",
                         mb: { xs: 3, md: 5 },
                         px: { xs: 2, sm: 4, md: 5 },
-                        py: { xs: 4, md: 5 },
+                        py: { xs: 4, md: 5.5 },
                         borderRadius: { xs: 4, md: 6 },
                         border: "1px solid rgba(255, 255, 255, 0.6)",
                         background:
@@ -57,42 +61,45 @@ export const HomePage = () => {
                                 "radial-gradient(circle, rgba(255, 132, 0, 0.25), transparent 70%)",
                         }}
                     />
-                    <Chip
-                        label="Curated Collection"
-                        sx={{
-                            mb: 2,
-                            px: 1,
-                            fontWeight: 700,
-                            color: "#9a3412",
-                            backgroundColor: "rgba(255, 237, 213, 0.95)",
-                        }}
-                    />
-                    <Typography
-                        variant="h2"
-                        component="h1"
-                        sx={{
-                            maxWidth: 760,
-                            fontSize: { xs: "2.2rem", sm: "3rem", md: "4rem" },
-                            lineHeight: 1.05,
-                            letterSpacing: "-0.03em",
-                            fontWeight: 800,
-                            color: "#111827",
-                        }}
-                    >
-                        Discover standout products across every category.
-                    </Typography>
-                    <Typography
-                        variant="body1"
-                        sx={{
-                            mt: 2,
-                            maxWidth: 640,
-                            fontSize: { xs: "1rem", md: "1.05rem" },
-                            color: "rgba(17, 24, 39, 0.7)",
-                        }}
-                    >
-                        Lorem Ipsum is simply dummy text of the printing and
-                        typesetting industry.
-                    </Typography>
+                    <Box sx={{ position: "relative", zIndex: 1 }}>
+                        <Chip
+                            label="Curated Collection"
+                            sx={{
+                                mb: 2,
+                                px: 1,
+                                fontWeight: 700,
+                                color: "#9a3412",
+                                backgroundColor: "rgba(255, 237, 213, 0.95)",
+                            }}
+                        />
+                        <Typography
+                            variant="h2"
+                            component="h1"
+                            sx={{
+                                maxWidth: 760,
+                                fontSize: { xs: "2.2rem", sm: "3rem", md: "4rem" },
+                                lineHeight: 1.02,
+                                letterSpacing: "-0.04em",
+                                fontWeight: 800,
+                                color: "#111827",
+                            }}
+                        >
+                            Discover standout products across every category.
+                        </Typography>
+                        <Typography
+                            variant="body1"
+                            sx={{
+                                mt: 2,
+                                maxWidth: 640,
+                                fontSize: { xs: "1rem", md: "1.05rem" },
+                                lineHeight: 1.8,
+                                color: "rgba(17, 24, 39, 0.7)",
+                            }}
+                        >
+                            Lorem Ipsum is simply dummy text of the printing and
+                            typesetting industry.
+                        </Typography>
+                    </Box>
                 </Box>
 
                 <Box
@@ -102,7 +109,7 @@ export const HomePage = () => {
                         px: { xs: 1, sm: 0 },
                     }}
                 >
-                    {Object.entries(itemsByCategory).map(
+                    {categoryEntries.map(
                         ([category, items]) => (
                             <Paper
                                 key={category}
@@ -116,6 +123,7 @@ export const HomePage = () => {
                                     backdropFilter: "blur(16px)",
                                     boxShadow:
                                         "0 18px 45px rgba(15, 23, 42, 0.08)",
+                                    overflow: "hidden",
                                 }}
                             >
                                 <Box

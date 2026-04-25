@@ -154,6 +154,15 @@ export const DetailPage = () => {
                             }}
                         >
                             <ZoomImage image={item.image} />
+                            <Box
+                                sx={{
+                                    position: "absolute",
+                                    inset: 0,
+                                    background:
+                                        "linear-gradient(180deg, rgba(15, 23, 42, 0.04) 0%, rgba(15, 23, 42, 0.12) 52%, rgba(15, 23, 42, 0.26) 100%)",
+                                    pointerEvents: "none",
+                                }}
+                            />
                             
                         </Paper>
 
@@ -175,43 +184,50 @@ export const DetailPage = () => {
                                 minHeight: { lg: "100%" },
                             }}
                         >
-                            <Typography
-                                variant="h1"
-                                component="h1"
+                            <Box
                                 sx={{
-                                    fontSize: {
-                                        xs: "1.75rem",
-                                        sm: "2.2rem",
-                                        md: "2.8rem",
-                                        lg: "3.1rem",
-                                    },
-                                    lineHeight: { xs: 1.08, md: 1 },
-                                    letterSpacing: "-0.04em",
-                                    fontWeight: 800,
-                                    color: "#0f172a",
-                                    mb: { xs: 2, sm: 2.5 },
-                                    pr: { xs: 2, md: 0 },
+                                    mb: { xs: 2.5, sm: 3 },
+                                    pb: { xs: 2, sm: 2.5 },
+                                    borderBottom: "1px solid rgba(148, 163, 184, 0.16)",
                                 }}
                             >
-                                {item.itemname}
-                            </Typography>
+                                <Typography
+                                    variant="h1"
+                                    component="h1"
+                                    sx={{
+                                        fontSize: {
+                                            xs: "1.75rem",
+                                            sm: "2.2rem",
+                                            md: "2.8rem",
+                                            lg: "3.1rem",
+                                        },
+                                        lineHeight: { xs: 1.08, md: 1 },
+                                        letterSpacing: "-0.04em",
+                                        fontWeight: 800,
+                                        color: "#0f172a",
+                                        mb: { xs: 2, sm: 2.5 },
+                                        pr: { xs: 2, md: 0 },
+                                    }}
+                                >
+                                    {item.itemname}
+                                </Typography>
 
-                            <Typography
-                                variant="overline"
-                                sx={{
-                                    letterSpacing: "0.18em",
-                                    fontWeight: 700,
-                                    color: "rgba(15, 23, 42, 0.45)",
-                                }}
-                            >
-                                Specifications
-                            </Typography>
+                                <Typography
+                                    variant="overline"
+                                    sx={{
+                                        letterSpacing: "0.18em",
+                                        fontWeight: 700,
+                                        color: "rgba(15, 23, 42, 0.45)",
+                                    }}
+                                >
+                                    Specifications
+                                </Typography>
+                            </Box>
 
                             <Box
                                 sx={{
                                     display: "grid",
-                                    gap: 1.5,
-                                    mt: 2,
+                                    gap: { xs: 1.25, sm: 1.5 },
                                     pb: { xs: 0.5, lg: 0 },
                                 }}
                             >
@@ -223,10 +239,12 @@ export const DetailPage = () => {
                                             overflow: "hidden",
                                             p: { xs: 2, sm: 2.25 },
                                             borderRadius: 4,
+                                            border: "1px solid rgba(255, 255, 255, 0.55)",
                                             background:
                                                 index % 2 === 0
                                                     ? "linear-gradient(135deg, rgba(255, 247, 237, 0.98), rgba(255, 237, 213, 0.9))"
                                                     : "linear-gradient(135deg, rgba(239, 246, 255, 0.98), rgba(219, 234, 254, 0.9))",
+                                            boxShadow: "0 10px 24px rgba(15, 23, 42, 0.06)",
                                         }}
                                     >
                                         <Typography
@@ -248,6 +266,7 @@ export const DetailPage = () => {
                                                     xs: "1rem",
                                                     sm: "1.15rem",
                                                 },
+                                                lineHeight: 1.35,
                                                 color: "#0f172a",
                                             }}
                                         >
