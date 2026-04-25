@@ -77,7 +77,11 @@ export const HomePage = () => {
                             component="h1"
                             sx={{
                                 maxWidth: 760,
-                                fontSize: { xs: "2.2rem", sm: "3rem", md: "4rem" },
+                                fontSize: {
+                                    xs: "2.2rem",
+                                    sm: "3rem",
+                                    md: "4rem",
+                                },
                                 lineHeight: 1.02,
                                 letterSpacing: "-0.04em",
                                 fontWeight: 800,
@@ -96,8 +100,8 @@ export const HomePage = () => {
                                 color: "rgba(17, 24, 39, 0.7)",
                             }}
                         >
-                            Lorem Ipsum is simply dummy text of the printing and
-                            typesetting industry.
+                            Explore products, compare features, and find what
+                            fits you best.
                         </Typography>
                     </Box>
                 </Box>
@@ -109,100 +113,93 @@ export const HomePage = () => {
                         px: { xs: 1, sm: 0 },
                     }}
                 >
-                    {categoryEntries.map(
-                        ([category, items]) => (
-                            <Paper
-                                key={category}
-                                elevation={0}
+                    {categoryEntries.map(([category, items]) => (
+                        <Paper
+                            key={category}
+                            elevation={0}
+                            sx={{
+                                p: { xs: 2, sm: 3 },
+                                borderRadius: 5,
+                                border: "1px solid rgba(255, 255, 255, 0.7)",
+                                background:
+                                    "linear-gradient(180deg, rgba(255, 255, 255, 0.82), rgba(255, 255, 255, 0.72))",
+                                backdropFilter: "blur(16px)",
+                                boxShadow: "0 18px 45px rgba(15, 23, 42, 0.08)",
+                                overflow: "hidden",
+                            }}
+                        >
+                            <Box
                                 sx={{
-                                    p: { xs: 2, sm: 3 },
-                                    borderRadius: 5,
-                                    border: "1px solid rgba(255, 255, 255, 0.7)",
-                                    background:
-                                        "linear-gradient(180deg, rgba(255, 255, 255, 0.82), rgba(255, 255, 255, 0.72))",
-                                    backdropFilter: "blur(16px)",
-                                    boxShadow:
-                                        "0 18px 45px rgba(15, 23, 42, 0.08)",
-                                    overflow: "hidden",
+                                    display: "flex",
+                                    alignItems: {
+                                        xs: "flex-start",
+                                        sm: "center",
+                                    },
+                                    justifyContent: "space-between",
+                                    gap: 1.5,
+                                    flexDirection: {
+                                        xs: "column",
+                                        sm: "row",
+                                    },
+                                    mb: 2,
                                 }}
                             >
-                                <Box
-                                    sx={{
-                                        display: "flex",
-                                        alignItems: {
-                                            xs: "flex-start",
-                                            sm: "center",
-                                        },
-                                        justifyContent: "space-between",
-                                        gap: 1.5,
-                                        flexDirection: {
-                                            xs: "column",
-                                            sm: "row",
-                                        },
-                                        mb: 2,
-                                    }}
-                                >
-                                    <Box>
-                                        <Typography
-                                            variant="h5"
-                                            component="h2"
-                                            fontWeight={800}
-                                            color="#0f172a"
-                                        >
-                                            {category}
-                                        </Typography>
-                                        <Typography
-                                            variant="body2"
-                                            sx={{
-                                                color: "rgba(15, 23, 42, 0.65)",
-                                                mt: 0.75,
-                                            }}
-                                        >
-                                            Explore all items in the{" "}
-                                            {category.toLowerCase()} category.
-                                        </Typography>
-                                    </Box>
-                                    <Chip
-                                        label={`${items.length} items`}
+                                <Box>
+                                    <Typography
+                                        variant="h5"
+                                        component="h2"
+                                        fontWeight={800}
+                                        color="#0f172a"
+                                    >
+                                        {category}
+                                    </Typography>
+                                    <Typography
+                                        variant="body2"
                                         sx={{
-                                            fontWeight: 700,
-                                            color: "#1d4ed8",
-                                            backgroundColor:
-                                                "rgba(219, 234, 254, 0.95)",
-                                            border: "1px solid rgba(59, 130, 246, 0.18)",
+                                            color: "rgba(15, 23, 42, 0.65)",
+                                            mt: 0.75,
                                         }}
-                                    />
+                                    >
+                                        Explore all items in the{" "}
+                                        {category.toLowerCase()} category.
+                                    </Typography>
                                 </Box>
-
-                                <Divider
+                                <Chip
+                                    label={`${items.length} items`}
                                     sx={{
-                                        mb: 3,
-                                        borderColor:
-                                            "rgba(148, 163, 184, 0.18)",
+                                        fontWeight: 700,
+                                        color: "#1d4ed8",
+                                        backgroundColor:
+                                            "rgba(219, 234, 254, 0.95)",
+                                        border: "1px solid rgba(59, 130, 246, 0.18)",
                                     }}
                                 />
+                            </Box>
 
-                                <Box
-                                    sx={{
-                                        display: "grid",
-                                        gridTemplateColumns: {
-                                            xs: "1fr",
-                                            sm: "repeat(2, minmax(0, 1fr))",
-                                            lg: "repeat(3, minmax(0, 1fr))",
-                                        },
-                                        gap: { xs: 2, sm: 3 },
-                                    }}
-                                >
-                                    {items.map((item) => (
-                                        <ItemCard
-                                            key={item.itemname}
-                                            item={item}
-                                        />
-                                    ))}
-                                </Box>
-                            </Paper>
-                        )
-                    )}
+                            <Divider
+                                sx={{
+                                    mb: 3,
+                                    borderColor: "rgba(148, 163, 184, 0.18)",
+                                }}
+                            />
+
+                            <Box
+                                sx={{
+                                    display: "grid",
+                                    gridTemplateColumns: {
+                                        xs: "1fr",
+                                        sm: "repeat(2, minmax(0, 1fr))",
+                                        lg: "repeat(3, minmax(0, 1fr))",
+                                    },
+                                    gap: { xs: 2, sm: 3 },
+                                }}
+                            >
+                                {items.map((item) => (
+                                    <ItemCard key={item.itemname} item={item} />
+                                ))}
+                            </Box>
+                        </Paper>
+                    ))}
                 </Box>
             </Container>
         </Box>
