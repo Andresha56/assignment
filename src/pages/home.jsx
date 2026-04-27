@@ -4,13 +4,34 @@ import Container from "@mui/material/Container";
 import Divider from "@mui/material/Divider";
 import Paper from "@mui/material/Paper";
 import Typography from "@mui/material/Typography";
-import { useMemo } from "react";
+import { matchSorter } from "match-sorter";
+import { useMemo, useState } from "react";
 import { ItemCard } from "../components/card";
+import { CatalogSearch } from "../components/catalog-search";
 import { cardData } from "../constants/data";
 
 export const HomePage = () => {
+    const [value, setValue] = useState("");
+
+    const filteredItems = useMemo(() => {
+        if (!value.trim()) {
+            return cardData;
+        }
+
+        return matchSorter(cardData, value, {
+            keys: [
+                "itemname",
+                "category",
+                (item) =>
+                    item.itemprops
+                        ?.map((property) => `${property.label} ${property.value}`)
+                        .join(" "),
+            ],
+        });
+    }, [value]);
+
     const itemsByCategory = useMemo(() => {
-        return cardData.reduce((categoryMap, item) => {
+        return filteredItems.reduce((categoryMap, item) => {
             const existingItems = categoryMap[item.category] ?? [];
 
             existingItems.push(item);
@@ -18,7 +39,7 @@ export const HomePage = () => {
 
             return categoryMap;
         }, {});
-    }, []);
+    }, [filteredItems]);
 
     const categoryEntries = useMemo(() => {
         return Object.entries(itemsByCategory);
@@ -103,6 +124,11 @@ export const HomePage = () => {
                             Explore products, compare features, and find what
                             fits you best.
                         </Typography>
+                        <CatalogSearch
+                            value={value}
+                            onChange={setValue}
+                            placeholder="Search by product, category, or spec"
+                        />
                     </Box>
                 </Box>
 
@@ -113,6 +139,51 @@ export const HomePage = () => {
                         px: { xs: 1, sm: 0 },
                     }}
                 >
+                    {value.trim() && (
+                        <Typography
+                            sx={{
+                                px: { xs: 1, sm: 0 },
+                                color: "rgba(15, 23, 42, 0.72)",
+                                fontWeight: 600,
+                            }}
+                        >
+                            Showing results for "{value.trim()}".
+                        </Typography>
+                    )}
+
+                    {categoryEntries.length === 0 && (
+                        <Paper
+                            elevation={0}
+                            sx={{
+                                p: { xs: 3, sm: 4 },
+                                borderRadius: 5,
+                                textAlign: "center",
+                                border: "1px solid rgba(255, 255, 255, 0.7)",
+                                background:
+                                    "linear-gradient(180deg, rgba(255, 255, 255, 0.82), rgba(255, 255, 255, 0.72))",
+                                backdropFilter: "blur(16px)",
+                                boxShadow: "0 18px 45px rgba(15, 23, 42, 0.08)",
+                            }}
+                        >
+                            <Typography
+                                variant="h5"
+                                component="h2"
+                                sx={{ fontWeight: 800, color: "#0f172a" }}
+                            >
+                                No matching products found
+                            </Typography>
+                            <Typography
+                                sx={{
+                                    mt: 1.25,
+                                    color: "rgba(15, 23, 42, 0.65)",
+                                }}
+                            >
+                                Clear the search or try a different term to see
+                                all items again.
+                            </Typography>
+                        </Paper>
+                    )}
+
                     {categoryEntries.map(([category, items]) => (
                         <Paper
                             key={category}
